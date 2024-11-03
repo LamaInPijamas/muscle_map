@@ -1,0 +1,2 @@
+module MuscleMapHelper
+end
