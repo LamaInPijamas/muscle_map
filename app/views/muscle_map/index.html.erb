@@ -1,3 +1,7 @@
 <div class="absolute top-0 left-0 w-full h-screen z-0" id="three-js-container">
-    <%= javascript_pack_tag 'muscle_map', defer: true %>
+  <%= javascript_pack_tag 'muscle_map', defer: true %>
+</div>
+
+<div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 z-10">
+  <input type="range" id="rotationSlider" min="0" max="360" value="0" step="1" class="w-64 appearance-none bg-gray-300 h-2 rounded-full overflow-hidden">
 </div>

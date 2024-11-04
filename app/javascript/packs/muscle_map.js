@@ -3,6 +3,7 @@ import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('three-js-container');
+  const rotationSlider = document.getElementById('rotationSlider');
 
   // Scene, Camera, Renderer
   const scene = new THREE.Scene();
@@ -14,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     0.1,
     1000
   );
-  camera.position.set(0, 0, 100); // Adjust the y and z values for better positioning
+  camera.position.set(0, 0, 100); // CAMERA POS
 
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(container.clientWidth, container.clientHeight);
@@ -27,13 +28,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
   scene.add(directionalLight);
 
+  // Declare `object` in the outer scope
+  let object;
+
   // Loader
   const loader = new OBJLoader();
   loader.load(
-    '/assets/man.obj', // Use '/models/man.obj' if moved to public directory
-    (object) => {
+    '/assets/man.obj',
+    (loadedObject) => {
+      object = loadedObject; // Assign to the outer variable
       object.scale.set(5, 5, 5); // Adjust scale
-      object.position.set(0, -50, 0); // Move the model down on the y-axis
+      object.position.set(0, 0, 0); // OBJECT POSITION
       scene.add(object);
 
       object.traverse((child) => {
@@ -80,6 +85,15 @@ document.addEventListener('DOMContentLoaded', () => {
     renderer.render(scene, camera);
   }
   animate();
+
+  // Add event listener to the slider
+  rotationSlider.addEventListener('input', () => {
+    if (object) {
+      const angleInDegrees = rotationSlider.value;
+      const angleInRadians = angleInDegrees * (Math.PI / 180);
+      object.rotation.y = angleInRadians; // Rotate around Y-axis
+    }
+  });
 
   // Handle Window Resize
   window.addEventListener('resize', () => {
