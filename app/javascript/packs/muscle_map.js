@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     0.1,
     1000
   );
-  camera.position.set(0, 50, 80); // Adjust the y and z values for better positioning
+  camera.position.set(0, 0, 100); // Adjust the y and z values for better positioning
 
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(container.clientWidth, container.clientHeight);
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     '/assets/man.obj', // Use '/models/man.obj' if moved to public directory
     (object) => {
       object.scale.set(5, 5, 5); // Adjust scale
-      object.position.set(0, 20, 0); // Move the model down on the y-axis
+      object.position.set(0, -50, 0); // Move the model down on the y-axis
       scene.add(object);
 
       object.traverse((child) => {
