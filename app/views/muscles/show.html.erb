@@ -1,2 +1,11 @@
-<h1>Muscles#show</h1>
-<p>Find me in app/views/muscles/show.html.erb</p>
+<div class="container mx-auto px-4 py-8 pt-36">
+  <div class="bg-white shadow-lg rounded-lg p-6">
+    <h1 class="text-3xl font-bold mb-4"><%= @muscle.name %></h1>
+    <p class="text-gray-700 text-lg mb-6"><%= @muscle.description %></p>
+
+    <div class="mt-6">
+      <%= link_to 'Edit Muscle', edit_muscle_path(@muscle), class: "bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded mr-2" %>
+      <%= link_to 'Back to List', muscles_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" %>
+    </div>
+  </div>
+</div>

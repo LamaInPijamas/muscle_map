@@ -6,13 +6,7 @@ Rails.application.routes.draw do
   get 'exercises/edit'
   get 'exercises/update'
   get 'exercises/destroy'
-  get 'muscles/index'
-  get 'muscles/show'
-  get 'muscles/new'
-  get 'muscles/create'
-  get 'muscles/edit'
-  get 'muscles/update'
-  get 'muscles/destroy'
+  resources :muscles
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
