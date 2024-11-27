@@ -1,2 +1,10 @@
-<h1>Exercises#show</h1>
-<p>Find me in app/views/exercises/show.html.erb</p>
+<h2 class="pt-20 text-2xl font-bold mb-4"><%= @exercise.name %></h2>
+<p class="text-gray-700 mb-4"><%= @exercise.description %></p>
+
+<% if @exercise.gif.attached? %>
+  <div class="mb-4">
+    <%= image_tag @exercise.gif, class: "w-full rounded-lg shadow-lg", alt: "#{@exercise.name} GIF" %>
+  </div>
+<% else %>
+  <p class="text-gray-500">No GIF uploaded for this exercise.</p>
+<% end %>

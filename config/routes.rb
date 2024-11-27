@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :muscles
-
-  resources :exercises
+  resources :muscles do
+    resources :exercises
+  end
 
   resources :articles
 

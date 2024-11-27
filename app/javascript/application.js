@@ -1,7 +1,6 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 import "@hotwired/turbo-rails"
-//god why this next line is default if nobody uses it and it only causes errors.
-//import "controllers"
+import "controllers"
 document.addEventListener("turbo:load", function() {
     const menuToggle = document.getElementById('menu-toggle');
     const navMenu = document.getElementById('nav-menu');

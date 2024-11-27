@@ -1,11 +1,52 @@
-<div class="container mx-auto px-4 py-8 pt-36">
-  <div class="bg-white shadow-lg rounded-lg p-6">
-    <h1 class="text-3xl font-bold mb-4"><%= @muscle.name %></h1>
-    <p class="text-gray-700 text-lg mb-6"><%= @muscle.description %></p>
-
-    <div class="mt-6">
-      <%= link_to 'Edit Muscle', edit_muscle_path(@muscle), class: "bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded mr-2" %>
-      <%= link_to 'Back to List', muscles_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" %>
+<!-- Hero Section -->
+<div class="relative bg-gray-800 text-white pt-36">
+  <div class="relative container mx-auto px-4 py-24 text-center">
+    <h1 class="text-6xl font-extrabold mb-4"><%= @muscle.name %></h1>
+    <p class="text-xl mb-6"><%= @muscle.description %></p>
+    <!-- Action Links -->
+    <div class="mt-6 flex justify-center space-x-4">
+      <%= link_to 'Add New Exercise', new_muscle_exercise_path(@muscle), class: "bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full" %>
+      <%= link_to 'Edit Muscle', edit_muscle_path(@muscle), class: "bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-full" %>
+      <%= link_to 'Back to List', muscles_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full" %>
     </div>
   </div>
+</div>
+
+<!-- Main Content -->
+<div class="container mx-auto px-4 py-12">
+
+  <!-- Exercise List Section -->
+  <h2 class="text-4xl font-semibold mb-8 text-center text-gray-800">Exercises</h2>
+
+  <% if @muscle.exercises.any? %>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <% @muscle.exercises.each do |exercise| %>
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+          <!-- Exercise Image or Video -->
+          <% if exercise.gif.attached? %>
+            <%= image_tag exercise.gif, class: "w-full h-48 object-cover rounded-md mb-4", alt: "#{exercise.name} Image" %>
+          <% elsif exercise.video.present? && exercise.video.include?("youtube.com") %>
+            <div class="aspect-w-16 aspect-h-9 mb-4">
+              <iframe
+                src="<%= exercise.video.gsub('watch?v=', 'embed/') %>"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                class="w-full h-full rounded-md shadow-lg">
+              </iframe>
+            </div>
+          <% end %>
+
+          <h3 class="text-2xl font-bold mb-2 text-center text-indigo-600"><%= exercise.name %></h3>
+          <p class="text-gray-700 mb-4"><%= exercise.description %></p>
+
+          <!-- Buttons -->
+          <div class="flex justify-center space-x-2">
+            <%= link_to 'Edit', edit_muscle_exercise_path(@muscle, exercise), class: "bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-full" %>
+            <%= button_to 'Destroy', muscle_exercise_path(@muscle, exercise), method: :delete, data: { confirm: 'Are you sure?' }, class: "..." %>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-gray-500 text-center text-xl">No exercises found for this muscle.</p>
+  <% end %>
 </div>

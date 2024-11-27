@@ -1,4 +1,10 @@
 class ExercisesController < ApplicationController
+  before_action :set_muscle, only: [:new, :create]
+
+  def index
+    Exercise.all
+  end
+
   def show
     @exercise = Exercise.find(params[:id])
   end
@@ -9,36 +15,45 @@ class ExercisesController < ApplicationController
   end
 
   def create
-    @muscle = Muscle.find(params[:muscle_id])
     @exercise = @muscle.exercises.build(exercise_params)
     if @exercise.save
-      redirect_to @exercise, notice: 'Exercise was successfully created.'
+      redirect_to root_path, notice: 'Exercise was successfully created.'
     else
       render :new
     end
   end
 
   def edit
-    @exercise = Exercise.find(params[:id])
+    @muscle = Muscle.find(params[:muscle_id])
+    @exercise = @muscle.exercises.find(params[:id])
   end
 
   def update
     @exercise = Exercise.find(params[:id])
     if @exercise.update(exercise_params)
-      redirect_to @exercise, notice: 'Exercise was successfully updated.'
+      redirect_to root_path, notice: 'Exercise was successfully updated.'
     else
       render :edit
+    end
   end
-  
+
   def destroy
     @exercise = Exercise.find(params[:id])
     @exercise.destroy
-    redirect_to muscle_path(@exercise.muscle), notice: 'Exercise was successfully destroyed.'
+    redirect_to muscles_url, notice: 'Exercise was successfully destroyed.'
   end
 
   private
 
+  def set_muscle
+    @muscle = Muscle.find(params[:muscle_id])
+  end
+
+  def set_exercise
+    @exercise = @muscle.exercises.find(params[:id])
+  end
+
   def exercise_params
-    params.require(:exercise).permit(:name, :description, :video)
+    params.require(:exercise).permit(:name, :description, :gif)
   end
 end
