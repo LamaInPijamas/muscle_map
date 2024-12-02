@@ -50,6 +50,11 @@
         <a href="/" class="px-3 py-2 text-gray-700 rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Exercises</a>
         <a href="/articles" class="mt-1 px-3 py-2 text-gray-700 rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 md:mt-0 md:ml-2">Study</a>
         <a href="#" class="mt-1 px-3 py-2 text-gray-700 rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 md:mt-0 md:ml-2">Support</a>
+        <% if user_signed_in? %>
+          <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "px-3 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600 md:ml-2" %>
+        <% else %>
+          <%= link_to 'Login', new_user_session_path, class: "px-3 py-2 text-white bg-green-500 rounded-lg hover:bg-green-600 md:ml-2" %>
+        <% end %>
       </div>
 
       <div class="relative mt-4 md:mt-0 md:ml-2">
