@@ -1,8 +1,22 @@
-<div class="absolute top-0 left-0 w-full h-screen z-0" id="three-js-container">
-  <%= javascript_pack_tag 'muscle_map', defer: true %>
+<div class="bg-hero-pattern bg-cover bg-center h-screen z-0 flex items-center justify-start">
+  <div class="ml-8 text-left">
+    <h1 class="text-white font-bold text-4xl">
+      Your free, convenient<br>training app.
+    </h1>
+    <p class="text-white text-lg mt-4">
+      Start your journey today with our easy-to-use platform.
+    </p>
+    <button class="bg-white text-black font-bold py-2 px-4 rounded-full mt-8 hover:bg-blue-500 hover:text-white transition duration-300">
+      Explore now
+    </button>
+  </div>
 </div>
 
-<div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 z-10">
-  <h2 class="flex items-center justify-center text-gray-800 font-blond text-2xl capitalize">Rotate me!</h2>
-  <input type="range" id="rotationSlider" min="0" max="360" value="0" step="1" class="w-64 appearance-none bg-gray-300 h-2 rounded-full overflow-hidden">
+<!-- Threejs element and rotation input -->
+<div class="absolute left-0 w-full h-screen z-0" id="three-js-container">
+  <%= javascript_pack_tag 'muscle_map', defer: true %>
+  <div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 z-0">
+    <h2 class="flex items-center justify-center text-gray-800 font-bold text-2xl capitalize">Rotate me!</h2>
+    <input type="range" id="rotationSlider" min="0" max="360" value="0" step="1" class="w-64 appearance-none bg-gray-300 h-2 rounded-full overflow-hidden">
+  </div>
 </div>
