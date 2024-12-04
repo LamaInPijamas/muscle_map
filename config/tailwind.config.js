@@ -14,6 +14,7 @@ module.exports = {
       },
       backgroundImage: {
         'hero-pattern': "url('images/hero-mountain.jpg')",
+        'hero-gym': "url('images/gym-hero.jpg')",
       },
     },
   },

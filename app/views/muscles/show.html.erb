@@ -1,14 +1,9 @@
 <!-- Hero Section -->
-<div class="relative bg-gray-800 text-white pt-36">
+<div class="relative bg-hero-gym text-white pt-36">
   <div class="relative container mx-auto px-4 py-24 text-center">
     <h1 class="text-6xl font-extrabold mb-4"><%= @muscle.name %></h1>
     <p class="text-xl mb-6"><%= @muscle.description %></p>
     <!-- Action Links -->
-    <div class="mt-6 flex justify-center space-x-4">
-      <%= link_to 'Add New Exercise', new_muscle_exercise_path(@muscle), class: "bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full" %>
-      <%= link_to 'Edit Muscle', edit_muscle_path(@muscle), class: "bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-full" %>
-      <%= link_to 'Back to List', muscles_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full" %>
-    </div>
   </div>
 </div>
 

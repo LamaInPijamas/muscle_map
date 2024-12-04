@@ -72,3 +72,6 @@ gem "tailwindcss-rails", "~> 3.0"
 
 #auth
 gem "devise"
+#admin panel
+gem 'activeadmin'
+
