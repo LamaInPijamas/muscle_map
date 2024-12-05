@@ -68,10 +68,11 @@ group :test do
   gem "selenium-webdriver"
 end
 
+#frontend
 gem "tailwindcss-rails", "~> 3.0"
 
 #auth
 gem "devise"
 #admin panel
 gem 'activeadmin'
-
+gem 'sassc-rails' #needed by activeadmin for some reason
