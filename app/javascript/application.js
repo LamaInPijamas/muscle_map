@@ -1,6 +1,14 @@
 import "@hotwired/turbo-rails"
 import "controllers"
-import { gsap } from "gsap"
+
+//animations
+import { gsap } from "gsap";
+import { ScrollToPlugin } from "ScrollToPlugin";
+
+gsap.registerPlugin(ScrollToPlugin);
+
+//pages
+import "pages/main_page"
 
 document.addEventListener("turbo:load", function() {
   const menuToggle = document.getElementById('menu-toggle');
