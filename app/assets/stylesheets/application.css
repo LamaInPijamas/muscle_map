@@ -13,3 +13,9 @@
  *= require_self
  *= require application.tailwind.css
  */
+ @font-face {
+    font-family: 'KCB';
+    src: url('fonts/KCB.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }

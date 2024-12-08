@@ -10,6 +10,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
+        custom: ['KCB', 'sans-serif'],
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
       backgroundImage: {

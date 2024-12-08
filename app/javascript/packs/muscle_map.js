@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // scene, camera, renderer
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xffffff);
 
   const camera = new THREE.PerspectiveCamera(
     75,
@@ -17,10 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
   );
   camera.position.set(0, 0, 100); // CAMERA POSITION
 
-  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setSize(container.clientWidth, container.clientHeight);
+  renderer.autoClear = false;
   container.appendChild(renderer.domElement);
-
+  
   // light
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
   scene.add(ambientLight);
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
           originalMaterial = INTERSECTED.material;
 
           INTERSECTED.material = INTERSECTED.material.clone();
-          INTERSECTED.material.color.set(0x00a6ff); // blue hovering
+          INTERSECTED.material.color.set(0xe85d5d); // blue hovering
         }
       } else {
         if (INTERSECTED) {
