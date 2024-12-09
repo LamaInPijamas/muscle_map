@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderer.setSize(container.clientWidth, container.clientHeight);
   renderer.autoClear = false;
   container.appendChild(renderer.domElement);
-  
+
   // light
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
   scene.add(ambientLight);
@@ -32,28 +32,27 @@ document.addEventListener('DOMContentLoaded', () => {
   let INTERSECTED; // currently hovered object
   let originalMaterial; // To store the original material when hovering
 
-  // raycasting (makes code know what user is hovering into)
+  // raycasting
   const raycaster = new THREE.Raycaster();
   const mouse = new THREE.Vector2();
 
-  // tricky but works. Mapping the MODEL PARTS name with the muscles stored in RAILS db
   function partNameToMuscleId(partName) {
     const muscleMap = {
-      'Torso_001': 1,     // Map "Torso_001" (in the 3D model) to the "chest" muscle with ID 1
+      'Torso_001': 1,     
       'Biceps_R_001': 2,
       'Biceps_L_001': 2,
       'Shoulder_R_001': 3,
       'Shoulder_L_001': 3
     };
-    return muscleMap[partName] || null; // Return the ID or null if no mapping exists
+    return muscleMap[partName] || null;
   }
 
-  // loader
   const loader = new OBJLoader();
   loader.load(
     '/assets/man.obj',
     (loadedObject) => {
       object = loadedObject;
+      window.threeModel = object; // Make globally accessible for Draggable and rotation
       object.scale.set(5, 5, 5); 
       object.position.set(0, -50, 0);
       scene.add(object);
@@ -76,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('An error occurred:', error);
     }
   );
+
   container.addEventListener('mousemove', onMouseMove, false);
 
   function onMouseMove(event) {
@@ -96,9 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
           INTERSECTED = intersects[0].object;
           originalMaterial = INTERSECTED.material;
-
           INTERSECTED.material = INTERSECTED.material.clone();
-          INTERSECTED.material.color.set(0xe85d5d); // blue hovering
+          INTERSECTED.material.color.set(0xe85d5d);
         }
       } else {
         if (INTERSECTED) {
@@ -108,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }
+
   function redirectTo(path) {
     window.location.href = path;
   }
@@ -143,18 +143,21 @@ document.addEventListener('DOMContentLoaded', () => {
     renderer.render(scene, camera);
   }
   animate();
-  rotationSlider.addEventListener('input', () => {
-    if (object) {
-      const angleInDegrees = rotationSlider.value;
-      const angleInRadians = angleInDegrees * (Math.PI / 180);
-      object.rotation.y = angleInRadians;
-    }
-  });
+
+  // Rotate model on slider input
+  if (rotationSlider) {
+    rotationSlider.addEventListener('input', () => {
+      if (window.threeModel) {
+        const angleInDegrees = rotationSlider.value;
+        const angleInRadians = angleInDegrees * (Math.PI / 180);
+        window.threeModel.rotation.y = angleInRadians;
+      }
+    });
+  }
 
   window.addEventListener('resize', () => {
     const width = container.clientWidth;
     const height = container.clientHeight;
-
     renderer.setSize(width, height);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();

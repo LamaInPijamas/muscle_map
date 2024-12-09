@@ -5,8 +5,10 @@ import "controllers";
 import { gsap } from "gsap";
 import { ScrollToPlugin } from "ScrollToPlugin";
 import { ScrollTrigger } from "ScrollTrigger";
+import { Draggable } from "Draggable";
 
-gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
+
+gsap.registerPlugin(ScrollToPlugin, ScrollTrigger, Draggable);
 
 //pages
 import "pages/main_page";
