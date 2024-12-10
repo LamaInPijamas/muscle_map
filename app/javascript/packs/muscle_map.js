@@ -21,16 +21,19 @@ document.addEventListener('DOMContentLoaded', () => {
   renderer.autoClear = false;
   container.appendChild(renderer.domElement);
 
-  // light
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-  scene.add(ambientLight);
-
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-  scene.add(directionalLight);
+  // Key Light - Strong directional light from above
+  const keyLight = new THREE.DirectionalLight(0xffffff, 1.5);
+  keyLight.position.set(0, 200, 100); 
+  keyLight.castShadow = true; 
+  keyLight.shadow.mapSize.width = 1024; //performance warning
+  keyLight.shadow.mapSize.height = 1024; // performance warning
+  keyLight.shadow.camera.near = 0.5; 
+  keyLight.shadow.camera.far = 500; 
+  scene.add(keyLight);
 
   let object; // model
-  let INTERSECTED; // currently hovered object
-  let originalMaterial; // To store the original material when hovering
+  let INTERSECTED; 
+  let originalMaterial; 
 
   // raycasting
   const raycaster = new THREE.Raycaster();
