@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ExercisesController < ApplicationController
-  before_action :set_muscle, only: [:new, :create]
+  before_action :set_muscle, only: %i[new create]
 
   def index
     Exercise.all

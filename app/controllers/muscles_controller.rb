@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MusclesController < ApplicationController
   def index
     @muscles = Muscle.all
