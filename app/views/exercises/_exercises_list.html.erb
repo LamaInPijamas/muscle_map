@@ -1,0 +1,23 @@
+<% if exercises.any? %>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <% exercises.each do |exercise| %>
+      <div class="bg-white p-6 rounded-lg shadow-lg">
+        <% if exercise.gif.attached? %>
+          <%= image_tag exercise.gif, class: "w-full h-48 object-cover rounded-md mb-4", alt: "#{exercise.name} Image" %>
+        <% elsif exercise.video.present? && exercise.video.include?("youtube.com") %>
+          <div class="aspect-w-16 aspect-h-9 mb-4">
+            <iframe
+              src="<%= exercise.video.gsub('watch?v=', 'embed/') %>"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              class="w-full h-full rounded-md shadow-lg">
+            </iframe>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="text-white text-center">No exercises found.</p>
+<% end %>

@@ -45,6 +45,18 @@ class ExercisesController < ApplicationController
     redirect_to muscles_url, notice: 'Exercise was successfully destroyed.'
   end
 
+  def filter
+    @experience_level = params[:experience_level]
+    @setup_type = params[:setup_type]
+
+    @exercises = Exercise.where(experience_level: @experience_level, setup_type: @setup_type)
+
+    respond_to do |format|
+      format.html # in case handling non-AJAX requests
+      format.js
+    end
+    render partial: 'exercises_list', locals: { exercises: @exercises }# for some magic reason, this line is needed to render the partial. Simple render does not work, it does not see the partial.
+  end
   private
 
   def set_muscle
