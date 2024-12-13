@@ -76,7 +76,7 @@ document.addEventListener("turbo:load", function () {
       shininess: 30,
       waveHeight: 15,
       waveSpeed: 0.5,
-      zoom: 0.5,
+      zoom: 0.75,
     });
   }
 

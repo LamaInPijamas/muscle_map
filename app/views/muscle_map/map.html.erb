@@ -1,0 +1,31 @@
+<!-- Responsive Heading -->
+<div class="absolute top-20 left-1/2 transform -translate-x-1/2 z-10">
+<h1 class="font-custom text-white text-4xl sm:text-5xl lg:text-6xl uppercase tracking-wide text-center">
+    Choose Muscle
+</h1>
+</div>
+
+<!-- Three.js element and rotation input -->
+<div class="left-0 w-full h-screen" id="three-js-container">
+<%= javascript_pack_tag 'muscle_map', defer: true %>
+<div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 z-0">
+    <h2 class="font-custom flex items-center justify-center text-white font-bold text-2xl capitalize">Rotate me!</h2>
+
+    <!-- Styled Progress Bar with Draggable Handle -->
+    <div
+    class="relative w-72 h-4 bg-gradient-to-r from-gray-700 to-gray-900 rounded-full shadow-inner overflow-hidden"
+    id="progressContainer"
+    >
+    <!-- Outer glow -->
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-500 to-blue-400 opacity-50 blur-md"></div>
+    <!-- Progress Indicator -->
+    <div id="progressBar" class="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+    <!-- Draggable Handle -->
+    <div
+        id="progressHandle"
+        class="absolute top-0 -mt-1 w-6 h-6 bg-white rounded-full shadow cursor-pointer"
+        style="left: 0%;"
+    ></div>
+    </div>
+</div>
+</div>

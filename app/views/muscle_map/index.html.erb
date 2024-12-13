@@ -1,6 +1,6 @@
 <section id="section-1">
   <div class="text-left h-screen flex flex-col justify-center items-start space-y-4 ml-2 lg:ml-8">
-    <h1 class="font-custom text-white text-4xl sm:text-5xl lg:text-6xl drop-shadow-lg">
+    <h1 class="font-custom uppercase tracking-wide text-white text-4xl sm:text-5xl lg:text-6xl drop-shadow-lg">
       Your free, convenient<br>training app.
     </h1>
     <p class="font-custom text-white text-lg sm:text-xl mt-4">
@@ -12,8 +12,15 @@
   </div>
 </section>
 
-<section id="section-2">
-  <!-- Threejs element and rotation input -->
+<section id="section-2" class="mt-[100vh] relative"> 
+  <!-- Responsive Heading -->
+  <div class="absolute top-5 left-1/2 transform -translate-x-1/2 z-10">
+    <h1 class="font-custom text-white text-4xl sm:text-5xl lg:text-6xl uppercase tracking-wide text-center">
+      Choose Muscle
+    </h1>
+  </div>
+
+  <!-- Three.js element and rotation input -->
   <div class="left-0 w-full h-screen" id="three-js-container">
     <%= javascript_pack_tag 'muscle_map', defer: true %>
     <div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 z-0">
@@ -44,19 +51,19 @@
 <nav class="hidden lg:flex fixed top-1/2 right-8 -translate-y-1/2 flex-col space-y-4 z-50">
   <div data-target="#section-1" class="cursor-pointer flex flex-row-reverse items-center space-x-2 space-x-reverse bullet-container" data-step="1">
     <div class="w-4 h-4 rounded-full bg-gray-400 hover:bg-red-400 transition-colors bullet"></div>
-    <span class="font-custom text-white">Your journey begins</span>
+    <span class="font-custom uppercase tracking-wide text-white">Your journey begins</span>
   </div>
   <div data-target="#section-2" class="cursor-pointer flex flex-row-reverse items-center space-x-2 space-x-reverse bullet-container" data-step="2">
     <div class="w-4 h-4 rounded-full bg-gray-400 hover:bg-red-400 transition-colors bullet"></div>
-    <span class="font-custom text-white">Choose muscle</span>
+    <span class="font-custom uppercase tracking-wide text-white">Choose muscle</span>
   </div>
   <div data-target="#section-3" class="cursor-pointer flex flex-row-reverse items-center space-x-2 space-x-reverse bullet-container" data-step="3">
     <div class="w-4 h-4 rounded-full bg-gray-400 hover:bg-red-400 transition-colors bullet"></div>
-    <span class="font-custom text-white">What type of learner are you?</span>
+    <span class="font-custom uppercase tracking-wide text-white">About you!</span>
   </div>
   <div data-target="#section-4" class="cursor-pointer flex flex-row-reverse items-center space-x-2 space-x-reverse bullet-container" data-step="3">
     <div class="w-4 h-4 rounded-full bg-gray-400 hover:bg-red-400 transition-colors bullet"></div>
-    <span class="font-custom text-white">Browse exercises</span>
+    <span class="font-custom uppercase tracking-wide text-white">Browse exercises</span>
   </div>
 </nav>
 

@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   resources :articles
   get 'up' => 'rails/health#show', as: :rails_health_check
   root 'muscle_map#index'
+  get 'map' => 'muscle_map#map'
 end
