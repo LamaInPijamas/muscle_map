@@ -5,6 +5,10 @@ class ExercisesController < ApplicationController
   before_action :set_exercise, only: [:show, :edit, :update, :destroy]
   before_action :set_filters, only: [:filter]
 
+  VALID_EXPERIENCE_LEVELS = ['Novice', 'Intermediate', 'Advanced'].freeze
+  VALID_SETUP_TYPES = ['Bodyweight', 'Small Gym', 'Comercial Gym'].freeze
+
+
   def index
     Exercise.all
   end
@@ -48,16 +52,13 @@ class ExercisesController < ApplicationController
   end
 
   def filter
-    @experience_level = params[:experience_level]
-    @setup_type = params[:setup_type]
-
     @exercises = Exercise.where(experience_level: @experience_level, setup_type: @setup_type)
 
     respond_to do |format|
       format.html # in case handling non-AJAX requests
       format.js
     end
-    render partial: 'exercises_list', locals: { exercises: @exercises }# for some magic reason, this line is needed to render the partial. Simple render does not work, it does not see the partial where it clearly is and needs to be.
+    render partial: 'exercises_list', locals: { exercises: @exercises }
   end
   private
 
@@ -74,7 +75,15 @@ class ExercisesController < ApplicationController
   end
 
   def set_filters
-    @experience_level = params[:experience_level]
-    @setup_type = params[:setup_type]
+    @experience_level = validate_experience_level(params[:experience_level])
+    @setup_type = validate_setup_type(params[:setup_type])
+  end
+
+  def validate_experience_level(level)
+    VALID_EXPERIENCE_LEVELS.include?(level) ? level : 'Novice'
+  end
+
+  def validate_setup_type(type)
+    VALID_SETUP_TYPES.include?(type) ? type : 'Bodyweight'
   end
 end
