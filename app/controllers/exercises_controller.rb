@@ -2,6 +2,8 @@
 
 class ExercisesController < ApplicationController
   before_action :set_muscle, only: %i[new create]
+  before_action :set_exercise, only: [:show, :edit, :update, :destroy]
+  before_action :set_filters, only: [:filter]
 
   def index
     Exercise.all
@@ -55,7 +57,7 @@ class ExercisesController < ApplicationController
       format.html # in case handling non-AJAX requests
       format.js
     end
-    render partial: 'exercises_list', locals: { exercises: @exercises }# for some magic reason, this line is needed to render the partial. Simple render does not work, it does not see the partial.
+    render partial: 'exercises_list', locals: { exercises: @exercises }# for some magic reason, this line is needed to render the partial. Simple render does not work, it does not see the partial where it clearly is and needs to be.
   end
   private
 
@@ -69,5 +71,10 @@ class ExercisesController < ApplicationController
 
   def exercise_params
     params.require(:exercise).permit(:name, :description, :gif)
+  end
+
+  def set_filters
+    @experience_level = params[:experience_level]
+    @setup_type = params[:setup_type]
   end
 end
