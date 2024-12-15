@@ -1,43 +1,80 @@
+<!-- app/views/exercises/filter.html.erb (example file name) -->
 <div class="mx-auto w-[20%] min-w-[200px] text-center pt-32 pb-8">
   <%= form_with url: filter_exercises_path, method: :get, remote: true, html: { id: 'filterForm', class: 'flex flex-col space-y-6 items-center justify-center' } do %>
     <!-- Experience Level Selection -->
     <div class="flex space-x-4 justify-center">
       <%= hidden_field_tag :experience_level, nil, id: 'experience_level' %>
-      <button type="button"
-        class="font-custom bg-white text-black py-2 px-4 rounded-sm hover:bg-gradient-to-r from-blue-400 via-purple-500 to-blue-400 hover:text-white transition duration-300 whitespace-nowrap"
-        onclick="setExperienceLevel('Novice')">Novice</button>
-      <button type="button"
-        class="font-custom bg-white text-black py-2 px-4 rounded-sm hover:bg-gradient-to-r from-blue-400 via-purple-500 to-blue-400 hover:text-white transition duration-300 whitespace-nowrap"
-        onclick="setExperienceLevel('Intermediate')">Intermediate</button>
-      <button type="button"
-        class="font-custom bg-white text-black py-2 px-4 rounded-sm hover:bg-gradient-to-r from-blue-400 via-purple-500 to-blue-400 hover:text-white transition duration-300 whitespace-nowrap"
-        onclick="setExperienceLevel('Advanced')">Advanced</button>
+      <button type="button" id="noviceButton"
+        class="experience-button font-custom bg-white text-black py-2 px-4 rounded-sm hover:bg-gradient-to-r from-blue-400 via-purple-500 to-blue-400 hover:text-white transition duration-300 whitespace-nowrap"
+        onclick="setExperienceLevel('Novice', this)">Novice</button>
+      <button type="button" id="intermediateButton"
+        class="experience-button font-custom bg-white text-black py-2 px-4 rounded-sm hover:bg-gradient-to-r from-blue-400 via-purple-500 to-blue-400 hover:text-white transition duration-300 whitespace-nowrap"
+        onclick="setExperienceLevel('Intermediate', this)">Intermediate</button>
+      <button type="button" id="advancedButton"
+        class="experience-button font-custom bg-white text-black py-2 px-4 rounded-sm hover:bg-gradient-to-r from-blue-400 via-purple-500 to-blue-400 hover:text-white transition duration-300 whitespace-nowrap"
+        onclick="setExperienceLevel('Advanced', this)">Advanced</button>
     </div>
 
     <!-- Setup Type Selection -->
     <div class="flex space-x-4 justify-center">
       <%= hidden_field_tag :setup_type, nil, id: 'setup_type' %>
-      <button type="button"
-        class="font-custom bg-white text-black py-2 px-4 rounded-sm hover:bg-gradient-to-r from-blue-400 via-purple-500 to-blue-400 hover:text-white transition duration-300 whitespace-nowrap"
-        onclick="setSetupType('Bodyweight')">Bodyweight</button>
-      <button type="button"
-        class="font-custom bg-white text-black py-2 px-4 rounded-sm hover:bg-gradient-to-r from-blue-400 via-purple-500 to-blue-400 hover:text-white transition duration-300 whitespace-nowrap"
-        onclick="setSetupType('Small Gym')">Small Gym</button>
-      <button type="button"
-        class="font-custom bg-white text-black py-2 px-4 rounded-sm hover:bg-gradient-to-r from-blue-400 via-purple-500 to-blue-400 hover:text-white transition duration-300 whitespace-nowrap"
-        onclick="setSetupType('Comercial Gym')">Comercial Gym</button>
+      <button type="button" id="bodyweightButton"
+        class="setup-button font-custom bg-white text-black py-2 px-4 rounded-sm hover:bg-gradient-to-r from-blue-400 via-purple-500 to-blue-400 hover:text-white transition duration-300 whitespace-nowrap"
+        onclick="setSetupType('Bodyweight', this)">Bodyweight</button>
+      <button type="button" id="smallGymButton"
+        class="setup-button font-custom bg-white text-black py-2 px-4 rounded-sm hover:bg-gradient-to-r from-blue-400 via-purple-500 to-blue-400 hover:text-white transition duration-300 whitespace-nowrap"
+        onclick="setSetupType('Small Gym', this)">Small Gym</button>
+      <button type="button" id="largeGymButton"
+        class="setup-button font-custom bg-white text-black py-2 px-4 rounded-sm hover:bg-gradient-to-r from-blue-400 via-purple-500 to-blue-400 hover:text-white transition duration-300 whitespace-nowrap"
+        onclick="setSetupType('Large Gym', this)">Large Gym</button>
+    </div>
+
+    <!-- Filter Button -->
+    <div>
+      <%= submit_tag 'Filter', class: 'font-custom bg-blue-500 text-white py-2 px-4 rounded-sm hover:bg-blue-700 transition duration-300' %>
     </div>
   <% end %>
 </div>
 
 <script>
-  function setExperienceLevel(level) {
-    document.getElementById('experience_level').value = level;
-    document.getElementById('filterForm').submit();
+  function setExperienceLevel(level, button) {
+    const experienceField = document.getElementById('experience_level');
+    if (experienceField.value === level) {
+      experienceField.value = '';
+      button.classList.remove('active');
+    } else {
+      experienceField.value = level;
+      setActiveButton(button, 'experience_level');
+    }
   }
 
-  function setSetupType(type) {
-    document.getElementById('setup_type').value = type;
-    document.getElementById('filterForm').submit();
+  function setSetupType(type, button) {
+    const setupField = document.getElementById('setup_type');
+    if (setupField.value === type) {
+      setupField.value = '';
+      button.classList.remove('active');
+    } else {
+      setupField.value = type;
+      setActiveButton(button, 'setup_type');
+    }
+  }
+
+  function setActiveButton(button, group) {
+    let buttons;
+    if (group === 'experience_level') {
+      buttons = document.querySelectorAll('.experience-button');
+    } else if (group === 'setup_type') {
+      buttons = document.querySelectorAll('.setup-button');
+    }
+
+    buttons.forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
   }
 </script>
+
+<style>
+  .active {
+    background: linear-gradient(to right, #4a90e2, #8e44ad, #4a90e2);
+    color: white;
+  }
+</style>

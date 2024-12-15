@@ -52,12 +52,16 @@ class ExercisesController < ApplicationController
   end
 
   def filter
-    @exercises = Exercise.where(experience_level: @experience_level, setup_type: @setup_type)
+    @exercises = Exercise.all
 
-    respond_to do |format|
-      format.html # in case handling non-AJAX requests
-      format.js
+    if params[:experience_level].present?
+      @exercises = @exercises.where(experience_level: params[:experience_level])
     end
+
+    if params[:setup_type].present?
+      @exercises = @exercises.where(setup_type: params[:setup_type])
+    end
+
     render partial: 'exercises_list', locals: { exercises: @exercises }
   end
   private
