@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ExercisesController < ApplicationController
-  before_action :set_muscle, only: %i[new create]
+  before_action :set_muscle, only: %i[new create show edit update destroy]
   before_action :set_exercise, only: [:show, :edit, :update, :destroy]
   before_action :set_filters, only: [:filter]
 

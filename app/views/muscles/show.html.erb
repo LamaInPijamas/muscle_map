@@ -11,19 +11,25 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <% @muscle.exercises.each do |exercise| %>
           <div class="bg-white p-6 rounded-lg shadow-lg">
-            <!-- Exercise Image or Video -->
-            <% if exercise.gif.attached? %>
-              <%= image_tag exercise.gif, class: "w-full h-48 object-cover rounded-md mb-4", alt: "#{exercise.name} Image" %>
-            <% elsif exercise.video.present? && exercise.video.include?("youtube.com") %>
-              <div class="aspect-w-16 aspect-h-9 mb-4">
-                <iframe
-                  src="<%= exercise.video.gsub('watch?v=', 'embed/') %>"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                  class="w-full h-full rounded-md shadow-lg">
-                </iframe>
-              </div>
+            <%= link_to muscle_exercise_path(@muscle, exercise) do %>
+              <!-- Exercise Image or Video -->
+              <% if exercise.gif.attached? %>
+                <%= image_tag exercise.gif, class: "w-full h-48 object-cover rounded-md mb-4", alt: "#{exercise.name} Image" %>
+              <% elsif exercise.video.present? && exercise.video.include?("youtube.com") %>
+                <div class="aspect-w-16 aspect-h-9 mb-4">
+                  <iframe
+                    src="<%= exercise.video.gsub('watch?v=', 'embed/') %>"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    class="w-full h-full rounded-md shadow-lg">
+                  </iframe>
+                </div>
+              <% end %>
+              <!-- Exercise Title -->
+              <h3 class="font-custom text-lg text-center mt-4 text-gray-800">
+                <%= exercise.name %>
+              </h3>
             <% end %>
           </div>
         <% end %>
