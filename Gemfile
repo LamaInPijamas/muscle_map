@@ -82,3 +82,4 @@ gem 'activeadmin'
 gem 'sassc-rails' # needed by activeadmin for some reason
 
 gem "pry", "~> 0.15.0"
+gem "actiontext", "~> 7.1"
