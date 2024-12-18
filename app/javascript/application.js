@@ -1,19 +1,29 @@
-import "@hotwired/turbo-rails";
+// app/javascript/application.js
+
+import "@hotwired/turbo";
 import "controllers";
 
-//animations
-import { gsap } from "gsap";
-import { ScrollToPlugin } from "ScrollToPlugin";
-import { ScrollTrigger } from "ScrollTrigger";
-import { Draggable } from "Draggable";
+// Import GSAP and its plugins via Importmaps
+import gsap from "gsap";
+import ScrollToPlugin from "ScrollToPlugin";
+import ScrollTrigger from "ScrollTrigger";
+import Draggable from "Draggable";
 
-
+// Register GSAP plugins
 gsap.registerPlugin(ScrollToPlugin, ScrollTrigger, Draggable);
 
-//pages
-import "pages/main_page";
+// Import Pages and Modules
+import "muscle_map";
+
+// Import THREE.js and assign it to window.THREE for global access
+import * as THREE from "three";
+window.THREE = THREE;
+
+// Import VANTA.js
+import VANTA from "vanta.waves";
 
 document.addEventListener("turbo:load", function () {
+  // Menu Toggle Functionality
   const menuToggle = document.getElementById("menu-toggle");
   const navMenu = document.getElementById("nav-menu");
   const hamburgerIcon = document.getElementById("hamburger-icon");
@@ -62,23 +72,22 @@ document.addEventListener("turbo:load", function () {
   }
 
   // Initialize VANTA Waves
-  if (typeof VANTA !== "undefined") {
-    VANTA.WAVES({
-      el: "#wave-background",
-      mouseControls: true,
-      touchControls: true,
-      gyroControls: false,
-      minHeight: 200.0,
-      minWidth: 200.0,
-      scale: 1.0,
-      scaleMobile: 1.0,
-      color: 0xe1011,
-      shininess: 30,
-      waveHeight: 15,
-      waveSpeed: 0.5,
-      zoom: 0.75,
-    });
-  }
+  VANTA.WAVES({
+    el: "#wave-background",
+    THREE: window.THREE,
+    mouseControls: true,
+    touchControls: true,
+    gyroControls: false,
+    minHeight: 200.0,
+    minWidth: 200.0,
+    scale: 1.0,
+    scaleMobile: 1.0,
+    color: 0xe1011,
+    shininess: 30,
+    waveHeight: 15,
+    waveSpeed: 0.5,
+    zoom: 0.75,
+  });
 
   // Bullet navigation scrolling
   const bulletContainers = document.querySelectorAll(".bullet-container");
@@ -101,20 +110,25 @@ document.addEventListener("turbo:load", function () {
       container.classList.remove("active-bullet", "glow");
     });
 
-    const activeContainer = document.querySelector(`.bullet-container[data-step='${step}']`);
+    const activeContainer = document.querySelector(
+      `.bullet-container[data-step='${step}']`
+    );
     if (activeContainer) {
       activeContainer.classList.add("active-bullet", "glow");
     }
   }
-  
+
   // Create ScrollTriggers for each section
   const sections = ["#section-1", "#section-2", "#section-3", "#section-4"];
   sections.forEach((selector, index) => {
-    ScrollTrigger.create({
-      trigger: selector,
-      start: "top center",
-      onEnter: () => highlightBullet(index + 1),
-      onEnterBack: () => highlightBullet(index + 1),
-    });
+    const element = document.querySelector(selector);
+    if (element) {
+      ScrollTrigger.create({
+        trigger: selector,
+        start: "top center",
+        onEnter: () => highlightBullet(index + 1),
+        onEnterBack: () => highlightBullet(index + 1),
+      });
+    }
   });
 });

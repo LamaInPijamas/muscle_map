@@ -1,11 +1,17 @@
-import * as THREE from 'three';
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+import * as THREE from "three";
+import { OBJLoader } from "OBJLoader";
+
+document.addEventListener('turbo:load', () => {
   const container = document.getElementById('three-js-container');
   const rotationSlider = document.getElementById('rotationSlider');
 
-  // scene, camera, renderer
+  if (!container) {
+    console.error("Three.js container (#three-js-container) not found.");
+    return;
+  }
+
+  // Initialize scene, camera, renderer
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(
@@ -21,24 +27,25 @@ document.addEventListener('DOMContentLoaded', () => {
   renderer.autoClear = false;
   container.appendChild(renderer.domElement);
 
-  // Key Light - Strong directional light from above
+  // Add Key Light - Strong directional light from above
   const keyLight = new THREE.DirectionalLight(0xffffff, 1.5);
   keyLight.position.set(0, 200, 100); 
   keyLight.castShadow = true; 
-  keyLight.shadow.mapSize.width = 1024; //performance warning
-  keyLight.shadow.mapSize.height = 1024; // performance warning
+  keyLight.shadow.mapSize.width = 1024; // Performance warning
+  keyLight.shadow.mapSize.height = 1024; // Performance warning
   keyLight.shadow.camera.near = 0.5; 
   keyLight.shadow.camera.far = 500; 
   scene.add(keyLight);
 
-  let object; // model
+  let object; // Three.js model
   let INTERSECTED; 
   let originalMaterial; 
 
-  // raycasting
+  // Raycaster for mouse interactions
   const raycaster = new THREE.Raycaster();
   const mouse = new THREE.Vector2();
 
+  // Mapping part names to muscle IDs
   function partNameToMuscleId(partName) {
     const muscleMap = {
       'Torso_001': 1,     
@@ -50,9 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
     return muscleMap[partName] || null;
   }
 
+  // Load OBJ model
   const loader = new OBJLoader();
   loader.load(
-    '/assets/man.obj',
+    '/models/man.obj', // Ensure the path is correct
     (loadedObject) => {
       object = loadedObject;
       window.threeModel = object; // Make globally accessible for Draggable and rotation
@@ -79,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   );
 
+  // Mouse move event for highlighting parts
   container.addEventListener('mousemove', onMouseMove, false);
 
   function onMouseMove(event) {
@@ -111,10 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function redirectTo(path) {
-    window.location.href = path;
-  }
-
+  // Click event for interactions
   container.addEventListener('click', onMouseClick, false);
 
   function onMouseClick(event) {
@@ -141,6 +147,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function redirectTo(path) {
+    window.location.href = path;
+  }
+
+  // Animation loop
   function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
@@ -158,6 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Handle window resize
   window.addEventListener('resize', () => {
     const width = container.clientWidth;
     const height = container.clientHeight;

@@ -1,3 +1,5 @@
+<!-- app/views/pages/main_page.html.erb -->
+
 <section id="section-1">
   <div class="text-left h-screen flex flex-col justify-center items-start space-y-4 ml-2 lg:ml-8">
     <h1 class="font-custom uppercase tracking-wide text-white text-4xl sm:text-5xl lg:text-6xl drop-shadow-lg">
@@ -22,9 +24,12 @@
 
   <!-- Three.js element and rotation input -->
   <div class="left-0 w-full h-screen" id="three-js-container">
-    <%= javascript_pack_tag 'muscle_map', defer: true %>
+    <!-- Three.js canvas will be appended here by muscle_map.js -->
     <div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 z-0">
       <h2 class="font-custom flex items-center justify-center text-white font-bold text-2xl capitalize">Rotate me!</h2>
+
+      <!-- Rotation Slider -->
+      <input type="range" id="rotationSlider" min="0" max="360" value="0" class="mt-4">
 
       <!-- Styled Progress Bar with Draggable Handle -->
       <div
@@ -46,6 +51,29 @@
   </div>
 </section>
 
+<section id="section-3" class="mt-[100vh] relative">
+  <!-- Content for Section 3 -->
+  <div class="text-center h-screen flex flex-col justify-center items-center">
+    <h1 class="font-custom uppercase tracking-wide text-white text-4xl sm:text-5xl lg:text-6xl drop-shadow-lg">
+      About You
+    </h1>
+    <p class="font-custom text-white text-lg sm:text-xl mt-4">
+      Tell us more about your fitness goals.
+    </p>
+  </div>
+</section>
+
+<section id="section-4" class="mt-[100vh] relative">
+  <!-- Content for Section 4 -->
+  <div class="text-center h-screen flex flex-col justify-center items-center">
+    <h1 class="font-custom uppercase tracking-wide text-white text-4xl sm:text-5xl lg:text-6xl drop-shadow-lg">
+      Browse Exercises
+    </h1>
+    <p class="font-custom text-white text-lg sm:text-xl mt-4">
+      Find exercises tailored to your needs.
+    </p>
+  </div>
+</section>
 
 <!-- Fixed bullet navigation (only on this page) -->
 <nav class="hidden lg:flex fixed top-1/2 right-8 -translate-y-1/2 flex-col space-y-4 z-50">
@@ -61,13 +89,8 @@
     <div class="w-4 h-4 rounded-full bg-gray-400 hover:bg-red-400 transition-colors bullet"></div>
     <span class="font-custom uppercase tracking-wide text-white">About you!</span>
   </div>
-  <div data-target="#section-4" class="cursor-pointer flex flex-row-reverse items-center space-x-2 space-x-reverse bullet-container" data-step="3">
+  <div data-target="#section-4" class="cursor-pointer flex flex-row-reverse items-center space-x-2 space-x-reverse bullet-container" data-step="4">
     <div class="w-4 h-4 rounded-full bg-gray-400 hover:bg-red-400 transition-colors bullet"></div>
     <span class="font-custom uppercase tracking-wide text-white">Browse exercises</span>
   </div>
 </nav>
-
-
-
-
-
