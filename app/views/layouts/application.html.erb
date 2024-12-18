@@ -1,25 +1,25 @@
-<!-- app/views/layouts/application.html.erb -->
-
 <!DOCTYPE html>
 <html>
   <head>
     <title>MuscleMap</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <!-- CSRF and CSP Meta Tags -->
+    <!-- Include THREE and VANTA scripts from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.waves.min.js"></script>
+    
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <!-- Link Stylesheets -->
-    <%= stylesheet_link_tag "tailwind", "inter-font", "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload", defer: true %>
 
-    <!-- Importmaps JavaScript Tags -->
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <!-- VANTA Background Container -->
-    <div id="wave-background" class="top-0 left-0 w-full z-0">
+    <div id="wave-background" class="top-0 left-0 w-full z-0"><!-- VANTA Background Container -->
       <div class="relative z-10">
         <p class="notice"><%= notice %></p>
         <p class="alert"><%= alert %></p>
