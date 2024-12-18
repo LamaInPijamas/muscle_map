@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
+import { OBJLoader } from 'OBJLoader';
 
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('three-js-container');

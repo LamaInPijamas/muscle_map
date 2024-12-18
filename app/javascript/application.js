@@ -12,6 +12,7 @@ gsap.registerPlugin(ScrollToPlugin, ScrollTrigger, Draggable);
 
 //pages
 import "pages/main_page";
+import "./muscle_map";
 
 document.addEventListener("turbo:load", function () {
   const menuToggle = document.getElementById("menu-toggle");
