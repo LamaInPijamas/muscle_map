@@ -1,24 +1,30 @@
-# README
+# Muscle Map App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+*This project is still under development.
 
-Things you may want to cover:
+The Muscle Map App is a Ruby on Rails application designed to display a 3D interactive model of the human. User can interact with the model to explore specific muscles and discover the best exercises targeting those areas.
 
-* Ruby version
+## Features
+- Interactive 3D muscle map visualization.
+- Intuitive user interface for exploring muscle groups.
+- Detailed exercise suggestions tailored to specific muscles.
 
-* System dependencies
+## Technology Stack
+#Back end
+- Ruby on Rails 7.1.3
+- Ruby 3.3.0
+- SQLite3
+- ActiveAdmin & Devise
+- Puma
+#Front end
+- JavaScript
+- GSAP for animations
+- Stimulus-Rails
+- TailwindCSS for styling
+#Asset Management
+- Importmap-Rails
+- Sprockets-Rails
+#Development and Debugging
+- Pry
+- Rubocop
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
