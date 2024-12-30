@@ -10,21 +10,21 @@ The Muscle Map App is a Ruby on Rails application designed to display a 3D inter
 - Detailed exercise suggestions tailored to specific muscles.
 
 ## Technology Stack
-#Back end
+# Back end
 - Ruby on Rails 7.1.3
 - Ruby 3.3.0
 - SQLite3
 - ActiveAdmin & Devise
 - Puma
-#Front end
+# Front end
 - JavaScript
 - GSAP for animations
 - Stimulus-Rails
 - TailwindCSS for styling
-#Asset Management
+# Asset Management
 - Importmap-Rails
 - Sprockets-Rails
-#Development and Debugging
+# Development and Debugging
 - Pry
 - Rubocop
 
